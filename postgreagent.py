@@ -45,12 +45,11 @@ class PostgreAgent:
         data = []
         try:
             self.cursor.execute(sql)
+            return True
         except (Exception, psycopg2.Error) as error:
             logging.error(f"Echec requête : {error}")
-            return data
-        for row in self.cursor:
-            data.append([x for x in row])
-        return data
+            return False
+        
 
     def manage(self, sql):
         try:
